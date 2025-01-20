@@ -1,0 +1,79 @@
+.userCountList {
+  display: flex;
+ 
+}
+
+.userCountItem {
+  border: 2px solid var(--color-white);
+  border-radius: 50px;
+  width: 26px;
+  height: 28px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userCountItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.userCountItem:not(:first-child) {
+  margin-left: -10px;
+}
+
+.userCountText {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.16667;
+  color: var(--color-darkblue);
+}
+
+.userTextColor {
+  color: var(--color-lightgreen);
+}
+
+.numberCustomers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  background-color: var(--color-darkblue);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-white);
+  border-radius: 30px;
+  margin-left: -12px; 
+  margin-top: -3px;
+  padding: 12px;
+} 
+
+@media only screen and (min-width: 768px) {
+  .userCountItem {
+    width: 47px;
+    height: 47px;
+  }
+  .userCountItem:not(:first-child) {
+    margin-left: -19px;
+  }
+
+  .userCountText {
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 90px;
+  }
+
+  .numberCustomers {
+  
+    display: inline-flex;
+    height: 36px;
+    font-size: 14px;
+    padding: 13px;
+    margin-left: -17px; 
+    margin-top: -3px;
+  } 
+
+}

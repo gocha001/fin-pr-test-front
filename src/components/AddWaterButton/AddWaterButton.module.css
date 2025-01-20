@@ -1,0 +1,199 @@
+.buttonContainer {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 46px;
+  background-color: var(--color-darkblue);
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding: 0;
+  gap: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 18px;
+  border: none;
+}
+
+.buttonContainer:hover {
+  background-color: var(--color-darkblue);
+}
+
+.buttonIcon {
+  width: 16px;
+  height: 16px;
+  stroke: white;
+}
+
+.buttonContainer:hover .buttonIcon {
+  stroke: var(--color-lightgreen);
+}
+
+.buttonText {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--color-white);
+  margin: 0;
+}
+
+.buttonContainer:hover .buttonText {
+  color: var(--color-lightgreen);
+}
+
+@media (max-width: 767px) {
+  .buttonContainer {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    width: 140px;
+    height: 46px;
+    font-size: 14px;
+    gap: 10px;
+  }
+
+  .buttonIcon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .buttonText {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+/* Планшетная версия */
+@media (min-width: 768px) {
+  .buttonContainer {
+    width: 178px;
+    height: 60px;
+    top: 454px;
+    left: 494px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .buttonIcon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .buttonText {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+
+/* Десктопная версия */
+@media (min-width: 1440px) {
+  .buttonContainer {
+    width: 178px;
+    height: 60px;
+    top: 612px;
+    left: 462px;
+    padding: 18px 30px;
+  }
+
+  .buttonIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .buttonText {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+
+/* Стили для варианта dailyInfo */
+
+.dailyInfoVariant {
+  all: unset;
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent !important;
+  border: none;
+  cursor: pointer;
+}
+
+.dailyInfoIcon {
+  width: 30px;
+  height: 30px;
+  background-color: var(--color-lightgreen);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  box-shadow: none;
+}
+
+.dailyInfoIcon svg {
+  stroke: var(--color-darkblue);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.dailyInfoVariant:hover .dailyInfoIcon {
+  background-color: var(--color-darkblue);
+}
+
+.dailyInfoVariant:hover .dailyInfoIcon svg {
+  stroke: var(--color-white) !important;
+  fill: none;
+}
+
+.dailyInfoText {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-black);
+  line-height: 1.5;
+  margin: 0;
+  outline: none;
+}
+
+.dailyInfoVariant:hover .dailyInfoText {
+  color: var(--color-black);
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .dailyInfoIcon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .dailyInfoText {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .dailyInfoIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .dailyInfoText {
+    font-size: 16px;
+    line-height: 150%;
+  }
+}

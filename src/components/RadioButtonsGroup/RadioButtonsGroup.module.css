@@ -1,0 +1,75 @@
+.groupLabel {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: var(--color-darkblue);
+  display: block;
+  margin-bottom: 14px;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 20px;
+}
+
+.radioOption {
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.radioInput {
+  display: none;
+}
+
+.customRadio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.outerCircle {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--color-lightgreen);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.innerCircle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.radioInput:checked + .customRadio .outerCircle {
+  border-color: var(--color-lightgreen);
+}
+
+.radioInput:checked + .customRadio .innerCircle {
+  background-color: var(--color-lightgreen);
+}
+
+@media screen and (min-width: 768px) {
+  .groupLabel {
+    font-size: 18px;
+    line-height: 133%;
+    margin-bottom: 16px;
+  }
+
+  .optionLabel {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .outerCircle {
+    width: 30px;
+    height: 30px;
+  }
+}

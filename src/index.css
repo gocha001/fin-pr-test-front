@@ -1,0 +1,101 @@
+@import "../node_modules/modern-normalize/modern-normalize.css";
+
+:root {
+  /* Colors */
+  --color-white: #ffffff;
+  --color-lightgray: #f0eff4;
+  --color-lightgreen: #9be1a0;
+  --color-lightgreenhover: #87d28d;
+  --color-darkblue: #323f47;
+  --color-darkblue-translucent: rgba(50, 63, 71, 0.4);
+  --color-black: #2f2f2f;
+  --color-blacksemi: #2f2f2f80;
+  --color-error: #ef5050;
+  --color-border-today: #d2650c;
+  /* Animation */
+  --animation: 150ms ease-in;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/Poppins-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/Poppins-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.visually-hidden {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  margin: -1px;
+}
+
+body {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  min-height: 100vh;
+  height: 100%;
+  background-color: var(--color-white);
+  font-family: "Poppins", sans-serif;
+  color: var(--color-black);
+  margin: 0;
+  overscroll-behavior: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+#root {
+  width: 100%;
+}
+
+
+.react-joyride__overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
+  transition: all 0.3s ease-in-out;
+}
+

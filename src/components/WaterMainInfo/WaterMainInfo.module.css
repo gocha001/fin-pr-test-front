@@ -1,0 +1,70 @@
+/* Основной контейнер */
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 415px;
+  background-color: var(--color-lightgreen);
+  border-radius: 30px;
+  position: relative;
+}
+
+/* Контейнер для изображения бутылки */
+.bottleContainer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50px;
+  left: auto;
+  width: 262px;
+  height: 335px;
+}
+
+.bottleImage {
+  width: 100%;
+  height: auto;
+}
+
+/* Адаптивные стили для планшетов */
+@media (min-width: 768px) {
+  .mainContainer {
+    width: 704px;
+    height: 578px;
+    padding: 32px;
+  }
+
+  .bottleContainer {
+    top: 69px;
+    left: 165px;
+    width: 374px;
+    height: 477px;
+  }
+}
+
+/* Адаптивные стили для десктопов */
+@media (min-width: 1440px) {
+  .mainContainer {
+    width: 672px;
+    height: 736px;
+    padding: 32px;
+    background-color: var(--color-lightgreen);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .bottleContainer {
+    top: 92px;
+    left: 100px;
+    width: 472px;
+    height: 604px;
+  }
+}

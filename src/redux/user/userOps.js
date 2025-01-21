@@ -25,11 +25,15 @@ export const setupAxiosInterceptors = (store) => {
   axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
+      console.log(error.config);
+      console.log(error.response?.status);
       if (error.response?.status === 401) {
         try {
           const { refreshToken } = store.getState().user;
+          console.log(refreshToken);
           if (refreshToken) {
             const { data } = await axiosInstance.post("/auth/refresh");
+            console.log(data);
             store.dispatch(refreshTokens(data));
             setAuthHeader(data.accessToken);
             error.config.headers.Authorization = `Bearer ${data.accessToken}`;

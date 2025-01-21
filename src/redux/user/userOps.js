@@ -29,16 +29,18 @@ export const setupAxiosInterceptors = (store) => {
       console.log(error.response?.status);
       if (error.response?.status === 401) {
         try {
-          const { refreshToken } = store.getState().auth;
-          console.log(refreshToken);
-          if (refreshToken) {
-            const { data } = await axiosInstance.post("/auth/refresh");
-            console.log(data);
+          const data = await store.dispatch(refresh());
+          console.log(data);
+          // const { refreshToken } = store.getState().auth;
+          // console.log(refreshToken);
+          // if (refreshToken) {
+          //   const { data } = await axiosInstance.post("/auth/refresh");
+          //   console.log(data);
             store.dispatch(refreshTokens(data));
             setAuthHeader(data.accessToken);
             error.config.headers.Authorization = `Bearer ${data.accessToken}`;
             return axiosInstance.request(error.config);
-          }
+          // }
         } catch (refreshError) {
           return Promise.reject(refreshError);
         }
@@ -256,25 +258,25 @@ export const getUserCount = createAsyncThunk(
   }
 );
 
-// export const refresh = createAsyncThunk("auth/refresh", async (_, thunkApi) => {
-//   const savedToken = thunkApi.getState().auth.accessToken;
+export const refresh = createAsyncThunk("auth/refresh", async (_, thunkApi) => {
+  const savedToken = thunkApi.getState().auth.accessToken;
 
-//   if (!savedToken) {
-//     return thunkApi.rejectWithValue("Token does not exist!");
-//   }
-//   setAuthHeader(savedToken);
-//   try {
-//     const { data } = await axiosInstance.post("/auth/refresh");
+  if (!savedToken) {
+    return thunkApi.rejectWithValue("Token does not exist!");
+  }
+  setAuthHeader(savedToken);
+  try {
+    const { data } = await axiosInstance.post("/auth/refresh");
 
-//     if (!data.accessToken) {
-//       throw new Error("No accessToken in server response");
-//     }
-//     return data;
-//   } catch (error) {
-//     console.error("Error in refresh token:", error);
-//     return thunkApi.rejectWithValue(error.message);
-//   }
-// });
+    if (!data.accessToken) {
+      throw new Error("No accessToken in server response");
+    }
+    return data;
+  } catch (error) {
+    console.error("Error in refresh token:", error);
+    return thunkApi.rejectWithValue(error.message);
+  }
+});
 
 // axiosInstance.interceptors.response.use(
 //   (response) => response,

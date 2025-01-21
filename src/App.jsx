@@ -25,7 +25,7 @@ export function App() {
   const dispatch = useDispatch();
 
   const accessToken = useSelector(selectAccessToken);
-
+  console.log(accessToken);
   useEffect(() => {
     if (!accessToken) return;
     dispatch(fetchCurrentUser());

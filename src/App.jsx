@@ -1,5 +1,5 @@
 import { lazy, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { SharedLayout } from "./components/SharedLayout/SharedLayout";
 import { fetchCurrentUser } from "./redux/user/userOps";
@@ -7,6 +7,7 @@ import { RestrictedRoute } from "./components/RestrictedRoute";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { TourProvider } from "@reactour/tour";
 import steps from "./helpers/steps";
+import { selectAccessToken } from "./redux/user/selectors";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
@@ -23,9 +24,12 @@ const ResetPasswordPage = lazy(() =>
 export function App() {
   const dispatch = useDispatch();
 
+  const accessToken = useSelector(selectAccessToken);
+
   useEffect(() => {
+    if (!accessToken) return;
     dispatch(fetchCurrentUser());
-  }, [dispatch]);
+  }, [dispatch, accessToken]);
 
   return (
     <TourProvider

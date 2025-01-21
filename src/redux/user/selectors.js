@@ -11,3 +11,4 @@ export const selectDesiredVolume = (state) => state.auth.user.desiredVolume;
 export const selectIsResendEmail = (state) => state.auth.isResendVerify;
 export const selectUserCount = (state) => state.auth.userCount;
 
+export const selectAccessToken = (state) => state.auth.accessToken;

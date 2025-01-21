@@ -272,32 +272,32 @@ export const refresh = createAsyncThunk("auth/refresh", async (_, thunkApi) => {
   }
 });
 
-axiosInstance.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
+// axiosInstance.interceptors.response.use(
+//   (response) => response,
+//   async (error) => {
+//     const originalRequest = error.config;
 
-    if (
-      error.response?.status === 401 &&
-      !originalRequest._retry &&
-      !originalRequest.url.includes("/auth/refresh")
-    ) {
-      originalRequest._retry = true;
+//     if (
+//       error.response?.status === 401 &&
+//       !originalRequest._retry &&
+//       !originalRequest.url.includes("/auth/refresh")
+//     ) {
+//       originalRequest._retry = true;
 
-      try {
-        const result = await store.dispatch(refresh());
-        const newToken = result.payload.accessToken;
-        setAuthHeader(newToken);
+//       try {
+//         const result = await store.dispatch(refresh());
+//         const newToken = result.payload.accessToken;
+//         setAuthHeader(newToken);
 
-        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+//         originalRequest.headers.Authorization = `Bearer ${newToken}`;
 
-        return axiosInstance(originalRequest);
-      } catch (err) {
-        console.error("Failed to refresh token:", err);
-        store.dispatch(signOut());
-        return Promise.reject(err);
-      }
-    }
-    return Promise.reject(error);
-  }
-);
+//         return axiosInstance(originalRequest);
+//       } catch (err) {
+//         console.error("Failed to refresh token:", err);
+//         store.dispatch(signOut());
+//         return Promise.reject(err);
+//       }
+//     }
+//     return Promise.reject(error);
+//   }
+// );

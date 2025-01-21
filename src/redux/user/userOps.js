@@ -29,7 +29,7 @@ export const setupAxiosInterceptors = (store) => {
       console.log(error.response?.status);
       if (error.response?.status === 401) {
         try {
-          const { refreshToken } = store.getState().user;
+          const { refreshToken } = store.getState().auth;
           console.log(refreshToken);
           if (refreshToken) {
             const { data } = await axiosInstance.post("/auth/refresh");

@@ -4,9 +4,9 @@ import { refreshTokens } from "./userSlice";
 
 // Create an Axios instance with a base URL for API requests
 export const axiosInstance = axios.create({
-  baseURL: "https://water-tracker-backend-guwj.onrender.com",
+  baseURL: "https://fin-pr-test-bek.onrender.com",
   // baseURL: "http://localhost:3000",
-  // withCredentials: true,
+  withCredentials: true,
 });
 
 // Utility to set the Authorization header with the JWT token

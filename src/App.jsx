@@ -7,7 +7,7 @@ import { RestrictedRoute } from "./components/RestrictedRoute";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { TourProvider } from "@reactour/tour";
 import steps from "./helpers/steps";
-import { selectAccessToken } from "./redux/user/selectors";
+import { selectIsLoggedIn } from "./redux/user/selectors";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const SignInPage = lazy(() => import("./pages/SignInPage/SignInPage"));
@@ -24,12 +24,12 @@ const ResetPasswordPage = lazy(() =>
 export function App() {
   const dispatch = useDispatch();
 
-  const accessToken = useSelector(selectAccessToken);
-  console.log(accessToken);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  console.log(isLoggedIn);
   useEffect(() => {
-    if (!accessToken) return;
+    if (!isLoggedIn) return;
     dispatch(fetchCurrentUser());
-  }, [dispatch, accessToken]);
+  }, [dispatch, isLoggedIn]);
 
   return (
     <TourProvider

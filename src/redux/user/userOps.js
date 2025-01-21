@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-// import { refreshTokens } from "./userSlice";
-import { store } from "../store";
+import { refreshTokens } from "./userSlice";
+// import { store } from "../store";
 
 // Create an Axios instance with a base URL for API requests
 export const axiosInstance = axios.create({
@@ -21,28 +21,28 @@ const clearAuthHeader = () => {
 };
 
 // Set up Axios interceptors to handle token refresh on 401 errors
-// export const setupAxiosInterceptors = (store) => {
-//   axiosInstance.interceptors.response.use(
-//     (response) => response,
-//     async (error) => {
-//       if (error.response?.status === 401) {
-//         try {
-//           const { refreshToken } = store.getState().user;
-//           if (refreshToken) {
-//             const { data } = await axiosInstance.post("/auth/refresh");
-//             store.dispatch(refreshTokens(data));
-//             setAuthHeader(data.accessToken);
-//             error.config.headers.Authorization = `Bearer ${data.accessToken}`;
-//             return axiosInstance.request(error.config);
-//           }
-//         } catch (refreshError) {
-//           return Promise.reject(refreshError);
-//         }
-//       }
-//       return Promise.reject(error);
-//     }
-//   );
-// };
+export const setupAxiosInterceptors = (store) => {
+  axiosInstance.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      if (error.response?.status === 401) {
+        try {
+          const { refreshToken } = store.getState().user;
+          if (refreshToken) {
+            const { data } = await axiosInstance.post("/auth/refresh");
+            store.dispatch(refreshTokens(data));
+            setAuthHeader(data.accessToken);
+            error.config.headers.Authorization = `Bearer ${data.accessToken}`;
+            return axiosInstance.request(error.config);
+          }
+        } catch (refreshError) {
+          return Promise.reject(refreshError);
+        }
+      }
+      return Promise.reject(error);
+    }
+  );
+};
 
 // Thunk for user registration
 export const signUp = createAsyncThunk(
@@ -252,25 +252,25 @@ export const getUserCount = createAsyncThunk(
   }
 );
 
-export const refresh = createAsyncThunk("auth/refresh", async (_, thunkApi) => {
-  const savedToken = thunkApi.getState().auth.accessToken;
+// export const refresh = createAsyncThunk("auth/refresh", async (_, thunkApi) => {
+//   const savedToken = thunkApi.getState().auth.accessToken;
 
-  if (!savedToken) {
-    return thunkApi.rejectWithValue("Token does not exist!");
-  }
-  setAuthHeader(savedToken);
-  try {
-    const { data } = await axiosInstance.post("/auth/refresh");
+//   if (!savedToken) {
+//     return thunkApi.rejectWithValue("Token does not exist!");
+//   }
+//   setAuthHeader(savedToken);
+//   try {
+//     const { data } = await axiosInstance.post("/auth/refresh");
 
-    if (!data.accessToken) {
-      throw new Error("No accessToken in server response");
-    }
-    return data;
-  } catch (error) {
-    console.error("Error in refresh token:", error);
-    return thunkApi.rejectWithValue(error.message);
-  }
-});
+//     if (!data.accessToken) {
+//       throw new Error("No accessToken in server response");
+//     }
+//     return data;
+//   } catch (error) {
+//     console.error("Error in refresh token:", error);
+//     return thunkApi.rejectWithValue(error.message);
+//   }
+// });
 
 // axiosInstance.interceptors.response.use(
 //   (response) => response,

@@ -11,7 +11,7 @@ import {
   fetchOAuthUrl,
   googleLogin,
   getUserCount,
-  refresh,
+  // refresh,
 } from "./userOps";
 import toast from "react-hot-toast";
 
@@ -249,17 +249,17 @@ const userSlice = createSlice({
         });
       })
 
-      .addCase(refresh.fulfilled, (state, action) => {
-        state.accessToken = action.payload.accessToken;
-        state.isLoggedIn = true;
-        state.isRefreshing = false;
-      })
-      .addCase(refresh.pending, (state) => {
-        state.isRefreshing = true;
-      })
-      .addCase(refresh.rejected, (state) => {
-        state.isRefreshing = false;
-      });
+      // .addCase(refresh.fulfilled, (state, action) => {
+      //   state.accessToken = action.payload.accessToken;
+      //   state.isLoggedIn = true;
+      //   state.isRefreshing = false;
+      // })
+      // .addCase(refresh.pending, (state) => {
+      //   state.isRefreshing = true;
+      // })
+      // .addCase(refresh.rejected, (state) => {
+      //   state.isRefreshing = false;
+      // });
   },
 });
 

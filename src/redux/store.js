@@ -13,7 +13,7 @@ import storage from "redux-persist/lib/storage";
 import { waterReducer } from "./water/waterSlice";
 import { userReducer } from "./user/userSlice";
 import { loaderReducer } from "./loader/loaderSlice";
-// import { setupAxiosInterceptors } from "./user/userOps";
+import { setupAxiosInterceptors } from "./user/userOps";
 
 const userPersistConfig = {
   key: "user",
@@ -35,6 +35,6 @@ export const store = configureStore({
     }),
 });
 
-// setupAxiosInterceptors(store);
+setupAxiosInterceptors(store);
 
 export const persistor = persistStore(store);

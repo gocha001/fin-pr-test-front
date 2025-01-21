@@ -29,8 +29,8 @@ const waterSlice = createSlice({
       state.date = action.payload;
     },
   },
-  extraReducers: (builer) =>
-    builer
+  extraReducers: (builder) =>
+    builder
       .addCase(addWater.pending, (state) => {
         state.loading = true;
         state.error = null;

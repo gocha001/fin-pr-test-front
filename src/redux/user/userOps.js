@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { refreshTokens } from "./userSlice";
+// import { refreshTokens } from "./userSlice";
 // import { store } from "../store";
 
 // Create an Axios instance with a base URL for API requests
 export const axiosInstance = axios.create({
-  // baseURL: "https://fin-pr-test-bek.onrender.com",
-  baseURL: "http://localhost:3000",
+  baseURL: "https://fin-pr-test-bek.onrender.com",
+  // baseURL: "http://localhost:3000",
   withCredentials: true,
 });
 
@@ -27,7 +27,10 @@ export const setupAxiosInterceptors = (store) => {
     async (error) => {
       console.log(error.config);
       console.log(error.response?.status);
-      if (error.response?.status === 401) {
+      if (error.response?.status === 401 &&
+        !error.config._retry &&
+        !error.config.url.includes("auth/refresh")) {
+        error.config._retry = true;
         try {
           const data = await store.dispatch(refresh());
           console.log(data);
@@ -36,10 +39,10 @@ export const setupAxiosInterceptors = (store) => {
           // if (refreshToken) {
           //   const { data } = await axiosInstance.post("/auth/refresh");
           //   console.log(data);
-            store.dispatch(refreshTokens(data));
-            setAuthHeader(data.accessToken);
-            error.config.headers.Authorization = `Bearer ${data.accessToken}`;
-            return axiosInstance.request(error.config);
+            // store.dispatch(refreshTokens(data));
+            setAuthHeader(data.payload.accessToken);
+            error.config.headers.Authorization = `Bearer ${data.payload.accessToken}`;
+            return axiosInstance(error.config);
           // }
         } catch (refreshError) {
           return Promise.reject(refreshError);
@@ -267,11 +270,11 @@ export const refresh = createAsyncThunk("auth/refresh", async (_, thunkApi) => {
   setAuthHeader(savedToken);
   try {
     const { data } = await axiosInstance.post("/auth/refresh");
-
-    if (!data.accessToken) {
+console.log("Response from refresh endpoint:", data);
+    if (!data.data || !data.data.accessToken) {
       throw new Error("No accessToken in server response");
     }
-    return data;
+    return data.data;
   } catch (error) {
     console.error("Error in refresh token:", error);
     return thunkApi.rejectWithValue(error.message);
